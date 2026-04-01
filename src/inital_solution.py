@@ -5,7 +5,6 @@ def _generate_pairs(customers: list[Customer], depot: Customer):
     pairs = [(i,j,_savings(depot, i, j)) for i, j in combinations(customers, 2)]
     return sorted(pairs, key=lambda x: x[2], reverse=True) # Sort it with most savings -> least savings
 
-
 def _savings(depot: Customer, customer_i: Customer, customer_j: Customer) -> float:
     c1i = depot.dist(customer_i)
     c1j = depot.dist(customer_j)
@@ -21,7 +20,6 @@ def clarke_wright_algo(depot: Customer, customers: list[Customer]):
 
     for i, j, _ in pairs:
         route_i = next((route for route in routes if route.customers[-1] == i), None)
-
         route_j = next((route for route in routes if route.customers[0] == j), None)
 
         if route_i is None or route_j is None:
@@ -35,4 +33,5 @@ def clarke_wright_algo(depot: Customer, customers: list[Customer]):
         routes.remove(route_i)
         routes.remove(route_j)
         routes.append(merge)
+
     return routes

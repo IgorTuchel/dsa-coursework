@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from functools import reduce
 from math import hypot
 
 @dataclass(frozen=True, slots=True)
