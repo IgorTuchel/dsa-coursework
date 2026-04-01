@@ -1,4 +1,6 @@
 from dataclasses import dataclass, field
+from functools import reduce
+from math import hypot
 
 @dataclass(frozen=True, slots=True)
 class Customer:
@@ -8,7 +10,7 @@ class Customer:
     weight: int
     
     def dist(self, other: "Customer") -> float:
-        return ((self.pos_x - other.pos_x)**2 + (self.pos_y-other.pos_y)**2 )**0.5
+        return hypot(self.pos_x - other.pos_x, self.pos_y - other.pos_y)
 
 @dataclass
 class Route:
@@ -22,6 +24,15 @@ class Route:
     def can_add(self, other: Customer) -> bool:
         return self.total_demand + other.weight <= self.capacity
 
+    def can_merge(self, other: "Route") -> bool:
+        return self.total_demand + other.total_demand <= self.capacity
+
     def total_distance(self, depot: Customer) -> float:
         stops = [depot] + self.customers + [depot]
         return sum(stops[i].dist(stops[i+1]) for i in range(len(stops) -1))
+    
+    def __str__(self) -> str:
+        route_taken = "Depot -> " + " -> ".join(str(cus.id) for cus in self.customers) + " -> Depot\n"
+        total_demand = f"Total Demand: {self.total_demand}\n"
+        total_distance = f"Total Distance: {self.total_distance(Customer(0,0,0,0))}\n"
+        return route_taken + total_demand + total_distance
