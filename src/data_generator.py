@@ -3,7 +3,7 @@ import os
 from typing import Generator
 
 
-def generate_data_to_csv(amount: int, max_weight: int, max_size:int, name:str):
+def generate_data_to_csv(amount: int, max_weight: int, max_size:int, name:str) -> None:
     if os.path.exists(f"../data/{name}.csv"):
         raise FileExistsError(f"File name {name}.csv already exists at ../data/{name}.csv")
     

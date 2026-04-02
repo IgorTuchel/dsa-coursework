@@ -1,7 +1,8 @@
 from itertools import combinations
+from typing import Any
 from model import Customer, Route
 
-def _generate_pairs(customers: list[Customer], depot: Customer):
+def _generate_pairs(customers: list[Customer], depot: Customer) -> list[Any]:
     pairs = [(i,j,_savings(depot, i, j)) for i, j in combinations(customers, 2)]
     return sorted(pairs, key=lambda x: x[2], reverse=True) # Sort it with most savings -> least savings
 
@@ -14,7 +15,7 @@ def _savings(depot: Customer, customer_i: Customer, customer_j: Customer) -> flo
 
     return c1i + c1j - cij
 
-def clarke_wright_algo(depot: Customer, customers: list[Customer]):
+def clarke_wright_algo(depot: Customer, customers: list[Customer]) -> list[Route]:
     routes = [Route(customers=[cus]) for cus in customers]
     pairs = _generate_pairs(customers, depot)
 
