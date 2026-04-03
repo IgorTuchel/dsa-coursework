@@ -32,7 +32,6 @@ def clarke_wright_algo(depot: Customer, customers: list[Customer]) -> list[Route
         if route_i == route_j:
             continue
         if not route_i.can_merge(route_j):
-            print(f"Rejected: demand={route_i.total_demand+route_j.total_demand}")
             continue
 
         merge = Route(route_i.customers + route_j.customers)
