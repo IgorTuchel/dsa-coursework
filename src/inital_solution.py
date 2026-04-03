@@ -3,7 +3,11 @@ from typing import Any
 from model import Customer, Route
 
 def _generate_pairs(customers: list[Customer], depot: Customer) -> list[Any]:
-    pairs = [(i,j,_savings(depot, i, j)) for i, j in combinations(customers, 2)]
+    pairs = []
+    for i, j in combinations(customers, 2):
+        s = _savings(depot, i, j)
+        pairs.append((i,j,s))
+        pairs.append((j,i,s))
     return sorted(pairs, key=lambda x: x[2], reverse=True) # Sort it with most savings -> least savings
 
 def _savings(depot: Customer, customer_i: Customer, customer_j: Customer) -> float:
@@ -28,6 +32,7 @@ def clarke_wright_algo(depot: Customer, customers: list[Customer]) -> list[Route
         if route_i == route_j:
             continue
         if not route_i.can_merge(route_j):
+            print(f"Rejected: demand={route_i.total_demand+route_j.total_demand}")
             continue
 
         merge = Route(route_i.customers + route_j.customers)

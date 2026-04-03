@@ -14,7 +14,7 @@ class Customer:
 @dataclass
 class Route:
     customers: list[Customer] = field(default_factory=list)
-    capacity: int = 50
+    capacity: int = 250 
 
     @property
     def total_demand(self) -> int:
