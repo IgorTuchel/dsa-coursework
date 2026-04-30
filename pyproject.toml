@@ -6,4 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "streamlit>=1.55.0",
+    "yaspin>=3.4.0",
 ]
