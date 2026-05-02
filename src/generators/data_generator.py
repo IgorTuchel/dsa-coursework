@@ -12,6 +12,9 @@ def generate_data_to_csv(
         )
 
     with open(f"./data/{name}.csv", "w") as f:
+        f.write(f"amount={amount}\n")
+        f.write(f"max_size={max_size}\n")
+        f.write(f"max_weight={max_weight}\n")
         f.write("node,pos_x,pos_y,weight\n")
         for entry in generate_data(amount, max_weight, max_size):
             e = ",".join(entry) + "\n"

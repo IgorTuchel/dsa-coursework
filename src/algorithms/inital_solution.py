@@ -1,7 +1,25 @@
 from itertools import combinations
 from typing import Any
 
-from models.model import Customer, Route
+from models.base import InputParams, OutputBase
+from models.vrp import Customer, Route
+from utils.monitor import monitor
+
+
+@monitor
+def solve_clarke_wright(input_params: InputParams) -> OutputBase:
+    depot = input_params.depot
+    customers = input_params.customers
+    capacity_limit = input_params.capacity
+    routes = clarke_wright_algo(depot, customers, capacity_limit)
+    total_distance = sum(route.total_distance(depot) for route in routes)
+    output = OutputBase(
+        routes=routes,
+        input_params=input_params,
+        additional_params=None,
+        total_distance=total_distance,
+    )
+    return output
 
 
 def _generate_pairs(customers: list[Customer], depot: Customer) -> list[Any]:
@@ -25,8 +43,10 @@ def _savings(depot: Customer, customer_i: Customer, customer_j: Customer) -> flo
     return c1i + c1j - cij
 
 
-def clarke_wright_algo(depot: Customer, customers: list[Customer]) -> list[Route]:
-    routes = [Route(customers=[cus]) for cus in customers]
+def clarke_wright_algo(
+    depot: Customer, customers: list[Customer], capacity_limit=250
+) -> list[Route]:
+    routes = [Route(customers=[cus], capacity=capacity_limit) for cus in customers]
     pairs = _generate_pairs(customers, depot)
 
     for i, j, _ in pairs:

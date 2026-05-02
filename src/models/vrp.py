@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from math import hypot
 
@@ -9,7 +11,10 @@ class Customer:
     pos_y: int
     weight: int
 
-    def dist(self, other: "Customer") -> float:
+    def __repr__(self) -> str:
+        return f"Customer(id={self.id}, pos_x={self.pos_x}, pos_y={self.pos_y}, weight={self.weight})\n"
+
+    def dist(self, other: Customer) -> float:
         return hypot(self.pos_x - other.pos_x, self.pos_y - other.pos_y)
 
 
@@ -25,7 +30,7 @@ class Route:
     def can_add(self, other: Customer) -> bool:
         return self.total_demand + other.weight <= self.capacity
 
-    def can_merge(self, other: "Route") -> bool:
+    def can_merge(self, other: Route) -> bool:
         return self.total_demand + other.total_demand <= self.capacity
 
     def total_distance(self, depot: Customer) -> float:
