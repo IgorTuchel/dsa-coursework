@@ -16,12 +16,12 @@ def generate_data_to_csv(
         f.write(f"max_size={max_size}\n")
         f.write(f"max_weight={max_weight}\n")
         f.write("node,pos_x,pos_y,weight\n")
-        for entry in generate_data(amount, max_weight, max_size):
+        for entry in _generate_data(amount, max_weight, max_size):
             e = ",".join(entry) + "\n"
             f.write(e)
 
 
-def generate_data(
+def _generate_data(
     amount: int, max_weight: int, max_size: int
 ) -> Generator[list[str], None, None]:
     for cur_id in range(1, amount + 1):

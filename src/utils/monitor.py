@@ -57,6 +57,7 @@ def monitor(func):
             memory_usage=mem_delta / (1024**2),  # in MB
             time_taken=time_delta,
             hardware_info=hardware,
+            algorithm_used=func.__name__,
         )
         return output
 

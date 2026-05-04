@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-from models.base import InputParams
 from models.vrp import Customer, Route
 
 
@@ -11,7 +10,7 @@ class HGA:
     population_scale: int
     max_local_search: int
     tournament_size: int
-    input_params: InputParams
+    rand_seed: int
 
 
 @dataclass(slots=True)

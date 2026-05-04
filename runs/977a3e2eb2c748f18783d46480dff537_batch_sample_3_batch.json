@@ -1,0 +1,34 @@
+{
+  "batch_uuid": "977a3e2eb2c748f18783d46480dff537",
+  "data_set_path": "./data/sample_3.csv",
+  "path_name": "sample_3",
+  "amount": 5,
+  "algorithms": [
+    "HGA_Algorithm",
+    "solve_cvrp",
+    "solve_clarke_wright"
+  ],
+  "outputs": {
+    "HGA_Algorithm": [
+      "b528e3b5a3234875950331766195c054",
+      "708b7aeb96114de18263c8d6410dd02b",
+      "003ad0fd8be24d1d93e089b116d0f081",
+      "4a5d4dc2d5c64f52b4dcaef8697167d4",
+      "2417bc647cdb4beebc2211f8bb98b0cb"
+    ],
+    "solve_cvrp": [
+      "73a1ddba88014389a06073f5ca4c0204",
+      "9a75ab6d8d874fb19642a37f6e46e248",
+      "f43e5f1235b2401a9057ab5bab012289",
+      "2bb0957c9c324582a390dfcc216a288d",
+      "c938e029f48947859f40c0fda0f9ef04"
+    ],
+    "solve_clarke_wright": [
+      "70e44bd656d64ff891c2aca8633d9f40",
+      "a235e4b775534381b9366b7347637b6f",
+      "99ff5a9507cf43da9ff5482f2186b92b",
+      "a02f1198d2a14e51848a1c20ef5d713e",
+      "d7a55c918edf4b0792411aed987dc784"
+    ]
+  }
+}

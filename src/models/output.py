@@ -22,6 +22,7 @@ class Output:
     memory_usage: Any
     time_taken: float
     hardware_info: HardwareInformation
+    algorithm_used: str
 
 
 @dataclass

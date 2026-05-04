@@ -47,20 +47,26 @@ def clarke_wright_algo(
     depot: Customer, customers: list[Customer], capacity_limit=250
 ) -> list[Route]:
     routes = [Route(customers=[cus], capacity=capacity_limit) for cus in customers]
+    customer_route = {cus: route for route in routes for cus in route.customers}
     pairs = _generate_pairs(customers, depot)
 
     for i, j, _ in pairs:
-        route_i = next((route for route in routes if route.customers[-1] == i), None)
-        route_j = next((route for route in routes if route.customers[0] == j), None)
-
+        route_i = customer_route.get(i)
+        route_j = customer_route.get(j)
         if route_i is None or route_j is None:
             continue
         if route_i == route_j:
+            continue
+        if route_i.customers[-1] != i:
+            continue
+        if route_j.customers[0] != j:
             continue
         if not route_i.can_merge(route_j):
             continue
 
         merge = Route(route_i.customers + route_j.customers)
+        for cus in merge.customers:
+            customer_route[cus] = merge
         routes.remove(route_i)
         routes.remove(route_j)
         routes.append(merge)

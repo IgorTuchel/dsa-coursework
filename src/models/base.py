@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 
 from models.vrp import Customer, Route
 
+# creates circular import issue without
 if TYPE_CHECKING:
     from models.individual import HGA
 
