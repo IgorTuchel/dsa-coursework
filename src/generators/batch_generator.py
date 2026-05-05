@@ -4,16 +4,6 @@ import uuid
 
 from algorithms.optimised_solution import HGA_Algorithm
 from generators.result_generator import save_result
-from models.individual import HGA
-
-DEFAULT_HGA = HGA(
-    minimum_population_size=10,
-    max_itterations_without_improvement=100,
-    population_scale=4,
-    max_local_search=10,
-    tournament_size=3,
-    rand_seed=40,
-)
 
 
 class BatchRunGenerator:
@@ -24,7 +14,7 @@ class BatchRunGenerator:
         algorithms,
         path_name,
         input_params,
-        hga_params=None,
+        hga_params,
     ):
         self.data_set_path = data_set_path
         self.amount = amount
@@ -39,7 +29,8 @@ class BatchRunGenerator:
     def generate(self):
         total_runs = len(self.algorithms) * self.amount
         completed = 0
-
+        if not self.algorithms:
+            return
         for algorithm in self.algorithms:
             name = algorithm.__name__
             self.outfiles[name] = []
@@ -47,7 +38,7 @@ class BatchRunGenerator:
             for _ in range(self.amount):
                 if algorithm is HGA_Algorithm:
                     new_rand = random.randint(0, 10000)
-                    hga = self.hga_params or DEFAULT_HGA
+                    hga = self.hga_params
                     hga.rand_seed = new_rand
                     output = algorithm(hga, self.input_params)
                 else:

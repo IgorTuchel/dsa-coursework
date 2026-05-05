@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Run Details", layout="wide")
 st.title("Run Details")
-st.caption("Inspect individual runs and raw output fields.")
+st.caption("Inspect individual runs and raw json output fields.")
 
 batch_files = load_batch_files()
 if not batch_files:
@@ -72,6 +72,7 @@ if selected_payload:
                 "time_taken": run_data.get("time_taken"),
                 "memory_usage": run_data.get("memory_usage"),
                 "algorithm_used": run_data.get("algorithm_used"),
+                "additional_params": run_data.get("additional_params"),
             }
         )
     with st.expander("Routes"):

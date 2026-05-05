@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Overview", layout="wide")
 st.title("Overview")
-st.caption("High-level summary of the selected VRP batch.")
+st.caption("Summary of the selected CVRP batch.")
 
 batch_files = load_batch_files()
 if not batch_files:
